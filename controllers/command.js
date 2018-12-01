@@ -30,7 +30,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: Command,
-          as: 'command'
+          as: 'commands'
         }],
       })
       .then((command) => {
@@ -48,7 +48,7 @@ module.exports = {
     return Command
       .create({
         device_id: req.body.device_id,
-        function_id: req.body.function_id,
+        func_id: req.body.function_id,
         user_id: req.body.user_id,
         value: req.body.value,
         unit: req.body.unit
@@ -62,7 +62,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: Command,
-          as: 'command'
+          as: 'commands'
         }],
       })
       .then(command => {
@@ -73,7 +73,11 @@ module.exports = {
         }
         return command
           .update({
-            command_name: req.body.command_name || classroom.command_name,
+            device_id: req.body.device_id || command.device_id,
+            func_id: req.body.func_id || command.func_id,
+            user_id: req.body.user_id || command.user_id,
+            value: req.body.value || command.value,
+            unit: req.body.unit || command.unit
           })
           .then(() => res.status(200).send(command))
           .catch((error) => res.status(400).send(error));
