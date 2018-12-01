@@ -1,47 +1,42 @@
 var express = require('express');
 var router = express.Router();
 
-const classroomController = require('../controllers').classroom;
-const studentController = require('../controllers').student;
-const lecturerController = require('../controllers').lecturer;
-const courseController = require('../controllers').course;
+const userController = require('../controllers').user;
+const commandController = require('../controllers').command;
+const deviceController = require('../controllers').device;
+const funcController = require('../controllers').func;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* Classroom Router */
-router.get('/api/classroom', classroomController.list);
-router.get('/api/classroom/:id', classroomController.getById);
-router.post('/api/classroom', classroomController.add);
-router.put('/api/classroom/:id', classroomController.update);
-router.delete('/api/classroom/:id', classroomController.delete);
+/* User Router */
+router.get('/user', userController.list);
+router.get('/user/:id', userController.getById);
+router.post('/user', userController.add);
+router.put('/user/:id', userController.update);
+router.delete('/user/:id', userController.delete);
 
-/* Student Router */
-router.get('/api/student', studentController.list);
-router.get('/api/student/:id', studentController.getById);
-router.post('/api/student', studentController.add);
-router.put('/api/student/:id', studentController.update);
-router.delete('/api/student/:id', studentController.delete);
+/* Command Router */
+router.get('/command', commandController.list);
+router.get('/command/:id', commandController.getById);
+router.post('/command', commandController.add);
+router.put('/command/:id', commandController.update);
+router.delete('/command/:id', commandController.delete);
 
-/* Lecturer Router */
-router.get('/api/lecturer', lecturerController.list);
-router.get('/api/lecturer/:id', lecturerController.getById);
-router.post('/api/lecturer', lecturerController.add);
-router.put('/api/lecturer/:id', lecturerController.update);
-router.delete('/api/lecturer/:id', lecturerController.delete);
+/* Device Router */
+router.get('/device', deviceController.list);
+router.get('/device/:id', deviceController.getById);
+router.post('/device', deviceController.add);
+router.put('/device/:id', deviceController.update);
+router.delete('/device/:id', deviceController.delete);
 
-/* Course Router */
-router.get('/api/course', courseController.list);
-router.get('/api/course/:id', courseController.getById);
-router.post('/api/course', courseController.add);
-router.put('/api/course/:id', courseController.update);
-router.delete('/api/course/:id', courseController.delete);
-
-/* Advance Router */
-router.post('/api/student/add_course', studentController.addCourse);
-router.post('/api/classroom/add_with_students', classroomController.addWithStudents);
-router.post('/api/lecturer/add_with_course', lecturerController.addWithCourse);
+/* Func Router */
+router.get('/function', funcController.list);
+router.get('/function/:id', funcController.getById);
+router.post('/function', funcController.add);
+router.put('/function/:id', funcController.update);
+router.delete('/function/:id', funcController.delete);
 
 module.exports = router;

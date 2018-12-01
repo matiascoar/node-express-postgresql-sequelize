@@ -1,89 +1,91 @@
-const Course = require('../models').Course;
-const Student = require('../models').Student;
-const Lecturer = require('../models').Lecturer;
+const Func = require('../models').Func;
+const Device = require('../models').Device;
+const Command = require('../models').Command;
 
 module.exports = {
   list(req, res) {
-    return Course
-      .findAll({
+    return Func
+      .findAll(/*{
         include: [{
-          model: Student,
-          as: 'students'
+          model: Device,
+          as: 'device'
         },{
-          model: Lecturer,
-          as: 'lecturer'
+          model: Command,
+          as: 'commands'
         }],
         order: [
           ['createdAt', 'DESC'],
-          [{ model: Student, as: 'students' }, 'createdAt', 'DESC'],
+          [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
         ],
-      })
-      .then((courses) => res.status(200).send(courses))
+      }*/)
+      .then((funcs) => res.status(200).send(funcs))
       .catch((error) => { res.status(400).send(error); });
   },
 
   getById(req, res) {
-    return Course
+    return Func
       .findById(req.params.id, {
         include: [{
-          model: Course,
-          as: 'course'
+          model: Func,
+          as: 'func'
         }],
       })
-      .then((course) => {
-        if (!course) {
+      .then((func) => {
+        if (!func) {
           return res.status(404).send({
-            message: 'Course Not Found',
+            message: 'Func Not Found',
           });
         }
-        return res.status(200).send(course);
+        return res.status(200).send(func);
       })
       .catch((error) => res.status(400).send(error));
   },
 
   add(req, res) {
-    return Course
+    return Func
       .create({
-        course_name: req.body.course_name,
+        func_name: req.body.func_name,
+        unit: req.body.unit,
+        device_id: req.body.device_id
       })
-      .then((course) => res.status(201).send(course))
+      .then((func) => res.status(201).send(func))
       .catch((error) => res.status(400).send(error));
   },
 
   update(req, res) {
-    return Course
+    return Func
       .findById(req.params.id, {
         include: [{
-          model: Course,
-          as: 'course'
+          model: Func,
+          as: 'func'
         }],
       })
-      .then(course => {
-        if (!course) {
+      .then(func => {
+        if (!func) {
           return res.status(404).send({
-            message: 'Course Not Found',
+            message: 'Func Not Found',
           });
         }
-        return course
+        return func
           .update({
-            course_name: req.body.course_name || classroom.course_name,
+            func_name: req.body.func_name || classroom.func_name,
           })
-          .then(() => res.status(200).send(course))
+          .then(() => res.status(200).send(func))
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
   },
 
   delete(req, res) {
-    return Course
+    return Func
       .findById(req.params.id)
-      .then(course => {
-        if (!course) {
+      .then(func => {
+        if (!func) {
           return res.status(400).send({
-            message: 'Course Not Found',
+            message: 'Func Not Found',
           });
         }
-        return course
+        return func
           .destroy()
           .then(() => res.status(204).send())
           .catch((error) => res.status(400).send(error));
