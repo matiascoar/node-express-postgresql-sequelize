@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     unit: DataTypes.STRING
   }, {});
   Command.associate = function(models) {
-    Command.belongsTo(models.Func);
+    /*Command.belongsTo(models.Func);
     Command.belongsTo(models.Device);
-    Command.belongsTo(models.User);
+    Command.belongsTo(models.User);*/
   };
   return Command;
 };

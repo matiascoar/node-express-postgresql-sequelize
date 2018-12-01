@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER
   }, {});
   Device.associate = function (models) {
-    Device.hasMany(models.Command, {
+    /*Device.hasMany(models.Command, {
       as: 'commands',
       foreignKey: 'device_id'
     });
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Device.hasMany(models.Func, {
       foreignKey: 'device_id',
       as: 'functions',
-    });
+    });*/
   };
   return Device;
 };

@@ -4,8 +4,7 @@ const Command = require('../models').Command;
 
 module.exports = {
   list(req, res) {
-    return Func
-      .findAll(/*{
+    return Func.findAll(/*{
         include: [{
           model: Device,
           as: 'device'
