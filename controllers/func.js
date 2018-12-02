@@ -5,7 +5,7 @@ const Command = require('../models').Command;
 module.exports = {
   list(req, res) {
     return Func.findAll(
-      /*{
+      {
       include: [{
         model: Device,
         as: 'device'
@@ -17,7 +17,7 @@ module.exports = {
         ['createdAt', 'DESC'],
         [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
       ],
-    }*/
+    }
     )
       .then((funcs) => res.status(200).send(funcs))
       .catch((error) => { res.status(400).send(error); });

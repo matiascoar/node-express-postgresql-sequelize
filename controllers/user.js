@@ -5,7 +5,7 @@ const Command = require('../models').Command;
 module.exports = {
   list(req, res) {
     return User
-      .findAll(/*{
+      .findAll({
         include: [{
           model: Device,
           as: 'devices'
@@ -18,7 +18,7 @@ module.exports = {
           [{ model: Device, as: 'devices' }, 'createdAt', 'DESC'],
           [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
         ],
-      }*/)
+      })
       .then((users) => res.status(200).send(users))
       .catch((error) => res.status(400).send(error))
   },

@@ -7,7 +7,7 @@ module.exports = {
   list(req, res) {
     return Command
       .findAll(
-        /*{
+        {
         include: [{
           model: User,
           as: 'user'
@@ -21,7 +21,7 @@ module.exports = {
         order: [
           ['createdAt', 'DESC'],
         ],
-      }*/
+      }
       )
       .then((commands) => res.status(200).send(commands))
       .catch((error) => { res.status(400).send(error); });
