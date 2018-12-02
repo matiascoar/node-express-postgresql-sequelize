@@ -6,7 +6,8 @@ const Func = require('../models').Func;
 module.exports = {
   list(req, res) {
     return Command
-      .findAll({
+      .findAll(
+        /*{
         include: [{
           model: User,
           as: 'user'
@@ -20,7 +21,8 @@ module.exports = {
         order: [
           ['createdAt', 'DESC'],
         ],
-      })
+      }*/
+      )
       .then((commands) => res.status(200).send(commands))
       .catch((error) => { res.status(400).send(error); });
   },
