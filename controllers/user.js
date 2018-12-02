@@ -27,8 +27,11 @@ module.exports = {
     return User
       .findById(req.params.id, {
         include: [{
-          model: User,
-          as: 'users'
+          model: Device,
+          as: 'devices'
+        }, {
+          model: Command,
+          as: 'commands'
         }],
       })
       .then((user) => {
@@ -57,9 +60,12 @@ module.exports = {
   update(req, res) {
     return User
       .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
+        cinlude: [{
+          model: Device,
+          as: 'devices'
+        }, {
+          model: Command,
+          as: 'commands'
         }],
       })
       .then(user => {

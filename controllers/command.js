@@ -29,12 +29,18 @@ module.exports = {
 
   getById(req, res) {
     return Command
-      .findById(req.params.id /*, {
+      .findById(req.params.id , {
         include: [{
-          model: Command,
-          as: 'commands'
+          model: User,
+          as: 'user'
+        }, {
+          model: Device,
+          as: 'device'
+        }, {
+          model: Func,
+          as: 'func'
         }],
-      }*/)
+      })
       .then((command) => {
         if (!command) {
           return res.status(404).send({
@@ -61,12 +67,18 @@ module.exports = {
 
   update(req, res) {
     return Command
-      .findById(req.params.id/*, {
+      .findById(req.params.id, {
         include: [{
-          model: Command,
-          as: 'commands'
+          model: User,
+          as: 'user'
+        }, {
+          model: Device,
+          as: 'device'
+        }, {
+          model: Func,
+          as: 'func'
         }],
-      }*/)
+      })
       .then(command => {
         if (!command) {
           return res.status(404).send({

@@ -29,7 +29,7 @@ module.exports = {
 
   getById(req, res) {
     return Device
-      .findById(req.params.id /*, {
+      .findById(req.params.id, {
         include: [{
           model: User,
           as: 'user'
@@ -40,7 +40,7 @@ module.exports = {
           model: Command,
           as: 'commands'
         }],
-      }*/)
+      })
       .then((device) => {
         if (!device) {
           return res.status(404).send({

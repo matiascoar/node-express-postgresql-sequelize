@@ -27,12 +27,15 @@ module.exports = {
   getById(req, res) {
     console.log('getById method for function controller')
     return Func
-      .findById(req.params.id /*, {
+      .findById(req.params.id, {
         include: [{
-          model: Func,
-          //as: 'funcs'
-        }],
-      }*/)
+        model: Device,
+        as: 'device'
+      }, {
+        model: Command,
+        as: 'commands'
+      }],
+      })
       .then((func) => {
         if (!func) {
           return res.status(404).send({
@@ -59,8 +62,11 @@ module.exports = {
     return Func
       .findById(req.params.id, {
         include: [{
-          model: Func,
-          as: 'funcs'
+          model: Device,
+          as: 'device'
+        }, {
+          model: Command,
+          as: 'commands'
         }],
       })
       .then(func => {
