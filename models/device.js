@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     });
     Device.belongsToMany(models.User, {
       through: 'Privilege',
-      as: 'permited_devices',
+      as: 'devices',
       foreignKey: 'user_id'
     });
-    Device.belongsTo(models.User, {
+    /*Device.belongsTo(models.User, {
       as: 'owned_devices',
       foreignKey: 'user_id'
-    });
+    });*/
     Device.hasMany(models.Func, {
       foreignKey: 'device_id',
       as: 'functions',

@@ -13,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.belongsToMany(models.Device, {
       through: 'Privilege',
-      as: 'permited_devices',
+      as: 'devices',
       foreignKey: 'device_id'
     });
-    User.hasMany(models.Device, {
+    /*User.hasMany(models.Device, {
       as: 'owned_devices',
       foreignKey: 'device_id'
-    });
+    });*/
   };
   return User;
 };

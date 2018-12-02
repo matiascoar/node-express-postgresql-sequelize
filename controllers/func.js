@@ -4,6 +4,7 @@ const Command = require('../models').Command;
 
 module.exports = {
   list(req, res) {
+    console.log('list method for function controller')
     return Func.findAll(
       {
       include: [{
@@ -24,13 +25,14 @@ module.exports = {
   },
 
   getById(req, res) {
+    console.log('getById method for function controller')
     return Func
-      .findById(req.params.id, {
+      .findById(req.params.id /*, {
         include: [{
           model: Func,
-          as: 'funcs'
+          //as: 'funcs'
         }],
-      })
+      }*/)
       .then((func) => {
         if (!func) {
           return res.status(404).send({
