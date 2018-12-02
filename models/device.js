@@ -6,19 +6,23 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER
   }, {});
   Device.associate = function (models) {
-    /*Device.hasMany(models.Command, {
+    Device.hasMany(models.Command /*, {
       as: 'commands',
       foreignKey: 'device_id'
-    });
+    }*/);
     Device.belongsToMany(models.User, {
       through: 'Privilege',
       as: 'devices',
       foreignKey: 'user_id'
     });
-    Device.hasMany(models.Func, {
+    Device.belongsTo(models.User, {
+      as: 'device',
+      foreignKey: 'user_id'
+    });
+    Device.hasMany(models.Func/*, {
       foreignKey: 'device_id',
       as: 'functions',
-    });*/
+    }*/);
   };
   return Device;
 };

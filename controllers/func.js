@@ -4,19 +4,19 @@ const Command = require('../models').Command;
 
 module.exports = {
   list(req, res) {
-    return Func.findAll(/*{
-        include: [{
-          model: Device,
-          as: 'device'
-        },{
-          model: Command,
-          as: 'commands'
-        }],
-        order: [
-          ['createdAt', 'DESC'],
-          [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
-        ],
-      }*/)
+    return Func.findAll({
+      include: [{
+        model: Device,
+        as: 'device'
+      }, {
+        model: Command,
+        as: 'commands'
+      }],
+      order: [
+        ['createdAt', 'DESC'],
+        [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
+      ],
+    })
       .then((funcs) => res.status(200).send(funcs))
       .catch((error) => { res.status(400).send(error); });
   },
@@ -26,7 +26,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: Func,
-          as: 'func'
+          as: 'funcs'
         }],
       })
       .then((func) => {
@@ -56,7 +56,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: Func,
-          as: 'func'
+          as: 'funcs'
         }],
       })
       .then(func => {
@@ -67,7 +67,9 @@ module.exports = {
         }
         return func
           .update({
-            func_name: req.body.func_name || classroom.func_name,
+            func_name: req.body.func_name || func.func_name,
+            unit: req.body.unit || func.unit,
+            device_id: req.body.device_id || func.device_id
           })
           .then(() => res.status(200).send(func))
           .catch((error) => res.status(400).send(error));

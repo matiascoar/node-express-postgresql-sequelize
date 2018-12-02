@@ -7,15 +7,19 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {});
   User.associate = function(models) {
-    /*User.hasMany(models.Command, {
+    User.hasMany(models.Command/*, {
       as: 'commands',
       foreignKey: 'user_id'
-    });
+    }*/);
     User.belongsToMany(models.Device, {
       through: 'Privilege',
-      as: 'users',
+      as: 'devices',
       foreignKey: 'device_id'
-    });*/
+    });
+    User.hasMany(models.Device/*, {
+      as: 'devices',
+      foreignKey: 'device_id'
+    }*/);
   };
   return User;
 };

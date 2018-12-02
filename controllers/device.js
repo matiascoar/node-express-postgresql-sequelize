@@ -6,14 +6,14 @@ const Command = require('../models').Command;
 module.exports = {
   list(req, res) {
     return Device
-      .findAll(/*{
+      .findAll({
         include: [{
           model: User,
           as: 'user'
-        },{
+        }, {
           model: Func,
           as: 'functions'
-        },{
+        }, {
           model: Command,
           as: 'commands'
         }],
@@ -22,7 +22,7 @@ module.exports = {
           [{ model: Func, as: 'functions' }, 'createdAt', 'DESC'],
           [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
         ],
-      }*/)
+      })
       .then((devices) => res.status(200).send(devices))
       .catch((error) => { res.status(400).send(error); });
   },
@@ -32,7 +32,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: Device,
-          as: 'device'
+          as: 'devices'
         }],
       })
       .then((device) => {
@@ -62,7 +62,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: Device,
-          as: 'device'
+          as: 'devices'
         }],
       })
       .then(device => {
@@ -73,7 +73,9 @@ module.exports = {
         }
         return device
           .update({
-            device_name: req.body.device_name || classroom.device_name,
+            device_name: req.body.device_name || device.device_name,
+            serial: req.body.serial || device.serial,
+            user_id: req.body.user_id || device.user_id
           })
           .then(() => res.status(200).send(device))
           .catch((error) => res.status(400).send(error));

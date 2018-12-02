@@ -12,31 +12,31 @@ router.get('/', function(req, res, next) {
 });
 
 /* User Router */
-router.get('/api/user', userController.list);
-router.get('/api/user/:id', userController.getById);
-router.post('/api/user', userController.add);
-router.put('/api/user/:id', userController.update);
-router.delete('/api/user/:id', userController.delete);
+router.get('/user', userController.list);
+router.get('/user/:id', userController.getById);
+router.post('/user', userController.add);
+router.put('/user/:id', userController.update);
+router.delete('/user/:id', userController.delete);
 
 /* Command Router */
-router.get('/api/command', commandController.list);
-router.get('/api/command/:id', commandController.getById);
-router.post('/api/command', commandController.add);
-router.put('/api/command/:id', commandController.update);
-router.delete('/api/command/:id', commandController.delete);
+router.get('/command', commandController.list);
+router.get('/command/:id', commandController.getById);
+router.post('/command', commandController.add);
+router.put('/command/:id', commandController.update);
+router.delete('/command/:id', commandController.delete);
 
 /* Device Router */
-router.get('/api/device', deviceController.list);
-router.get('/api/device/:id', deviceController.getById);
-router.post('/api/device', deviceController.add);
-router.put('/api/device/:id', deviceController.update);
-router.delete('/api/device/:id', deviceController.delete);
+router.get('/device', deviceController.list);
+router.get('/device/:id', deviceController.getById);
+router.post('/device', deviceController.add);
+router.put('/device/:id', deviceController.update);
+router.delete('/device/:id', deviceController.delete);
 
 /* Func Router */
-router.get('/api/function', funcController.list);
-router.get('/api/function/:id', funcController.getById);
-router.post('/api/function', funcController.add);
-router.put('/api/function/:id', funcController.update);
-router.delete('/api/function/:id', funcController.delete);
+router.get('/function', funcController.list);
+router.get('/function/:id', funcController.getById);
+router.post('/function', funcController.add);
+router.put('/function/:id', funcController.update);
+router.delete('/function/:id', funcController.delete);
 
 module.exports = router;

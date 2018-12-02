@@ -4,16 +4,20 @@ const Device = require('../models').Device;
 module.exports = {
   list(req, res) {
     return User
-      .findAll(/*{
+      .findAll({
         include: [{
           model: Device,
           as: 'devices'
+        },{
+          model: Command,
+          as: 'commands'
         }],
         order: [
           ['createdAt', 'DESC'],
           [{ model: Device, as: 'devices' }, 'createdAt', 'DESC'],
+          [{ model: Command, as: 'commands' }, 'createdAt', 'DESC'],
         ],
-      }*/)
+      })
       .then((users) => res.status(200).send(users))
       .catch((error) => { res.status(400).send(error); });
   },
@@ -23,7 +27,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: User,
-          as: 'user'
+          as: 'users'
         }],
       })
       .then((user) => {
@@ -54,7 +58,7 @@ module.exports = {
       .findById(req.params.id, {
         include: [{
           model: User,
-          as: 'user'
+          as: 'users'
         }],
       })
       .then(user => {
@@ -65,7 +69,10 @@ module.exports = {
         }
         return user
           .update({
-            user_name: req.body.user_name || classroom.user_name,
+            user_name: req.body.user_name || user.user_name,
+            mail: req.body.mail || user.mail,
+            id_admin: req.body.id_admin || user.is_admin,
+            password: req.body.password || user.password,
           })
           .then(() => res.status(200).send(user))
           .catch((error) => res.status(400).send(error));

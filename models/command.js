@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     unit: DataTypes.STRING
   }, {});
   Command.associate = function(models) {
-    /*Command.belongsTo(models.Func, {
+    Command.belongsTo(models.Func, {
       foreignKey: 'func_id',
       as: 'func'
     });
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Command.belongsTo(models.User, {
       foreignKey: 'user_id',
       as: 'user'
-    });*/
+    });
   };
   return Command;
 };
