@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     /*User.hasMany(models.Device, {
       as: 'owned_devices',
-      foreignKey: 'device_id'
+      foreignKey: 'owner_id'
     });*/
   };
   return User;

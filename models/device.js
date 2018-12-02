@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Device = sequelize.define('Device', {
     serial: DataTypes.INTEGER,
     device_name: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    //owner_id: DataTypes.INTEGER
+
   }, {});
   Device.associate = function (models) {
     Device.hasMany(models.Command, {
@@ -17,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     /*Device.belongsTo(models.User, {
       as: 'owned_devices',
-      foreignKey: 'user_id'
+      foreignKey: 'owner_id'
     });*/
     Device.hasMany(models.Func, {
       foreignKey: 'device_id',

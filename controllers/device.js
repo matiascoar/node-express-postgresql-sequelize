@@ -29,12 +29,18 @@ module.exports = {
 
   getById(req, res) {
     return Device
-      .findById(req.params.id, {
+      .findById(req.params.id /*, {
         include: [{
-          model: Device,
-          as: 'devices'
+          model: User,
+          as: 'user'
+        }, {
+          model: Func,
+          as: 'functions'
+        }, {
+          model: Command,
+          as: 'commands'
         }],
-      })
+      }*/)
       .then((device) => {
         if (!device) {
           return res.status(404).send({
@@ -51,7 +57,9 @@ module.exports = {
       .create({
         serial: req.body.serial,
         device_name: req.body.device_name,
-        user_id: req.body.user_id
+        user_id: req.body.user_id,
+        //owner_id: req.body.owner_id,
+
       })
       .then((device) => res.status(201).send(device))
       .catch((error) => res.status(400).send(error));
@@ -61,8 +69,14 @@ module.exports = {
     return Device
       .findById(req.params.id, {
         include: [{
-          model: Device,
-          as: 'devices'
+          model: User,
+          as: 'user'
+        }, {
+          model: Func,
+          as: 'functions'
+        }, {
+          model: Command,
+          as: 'commands'
         }],
       })
       .then(device => {

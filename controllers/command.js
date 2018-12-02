@@ -16,7 +16,7 @@ module.exports = {
           as: 'device'
         }, {
           model: Func,
-          as: 'function'
+          as: 'func'
         }],
         order: [
           ['createdAt', 'DESC'],
@@ -24,17 +24,17 @@ module.exports = {
       }
       )
       .then((commands) => res.status(200).send(commands))
-      .catch((error) => { res.status(400).send(error); });
+      .catch((error) => res.status(400).send(error))
   },
 
   getById(req, res) {
     return Command
-      .findById(req.params.id, {
+      .findById(req.params.id /*, {
         include: [{
           model: Command,
           as: 'commands'
         }],
-      })
+      }*/)
       .then((command) => {
         if (!command) {
           return res.status(404).send({
@@ -61,12 +61,12 @@ module.exports = {
 
   update(req, res) {
     return Command
-      .findById(req.params.id, {
+      .findById(req.params.id/*, {
         include: [{
           model: Command,
           as: 'commands'
         }],
-      })
+      }*/)
       .then(command => {
         if (!command) {
           return res.status(404).send({
