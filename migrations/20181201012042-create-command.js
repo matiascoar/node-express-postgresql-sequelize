@@ -11,7 +11,7 @@ module.exports = {
       device_id: {
         type: Sequelize.INTEGER
       },
-      function_id: {
+      func_id: {
         type: Sequelize.INTEGER
       },
       user_id: {
